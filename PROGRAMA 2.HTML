@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #202020;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .login-container h2 {
+            margin-top: 0;
+        }
+
+        .login-container label {
+            display: block;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+        }
+
+        .login-container button {
+            background-color: #555;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: calc(100% - 20px);
+            margin-bottom: 10px;
+        }
+
+        .login-container button:hover {
+            background-color: #777;
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .quantity-time {
+            color: #ccc;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .product-form {
+            display: none;
+        }
+
+        .product-form input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #444;
+            color: #fff;
+        }
+
+        .product-form button {
+            background-color: #555;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: calc(100% - 20px);
+            margin-bottom: 10px;
+        }
+
+        .product-form button:hover {
+            background-color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Controle de Estoque</h1>
+        </div>
+
+        <div class="login-container">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username" required><br>
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required><br>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+
+        <div id="productEntry" class="product-form">
+            <h2>Entrada de Produto</h2>
+            <label for="entryQuantity">Quantidade:</label>
+            <input type="number" id="entryQuantity" name="entryQuantity" min="1" required><br>
+            <button onclick="addProduct()">Adicionar ao Estoque</button>
+            <p class="quantity-time" id="entryQuantityTime"></p>
+        </div>
+
+        <div id="productExit" class="product-form">
+            <h2>Saída de Produto</h2>
+            <label for="exitQuantity">Quantidade:</label>
+            <input type="number" id="exitQuantity" name="exitQuantity" min="1" required><br>
+            <button onclick="removeProduct()">Dar Baixa no Estoque</button>
+            <p class="quantity-time" id="exitQuantityTime"></p>
+        </div>
+
+        <div id="productList" style="display: none;">
+            <h2>Lista de Produtos</h2>
+            <!-- Lista de produtos -->
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Controle de Estoque</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username === "SULIVAN.BUENO" && password === "280120") {
+                document.getElementById("loginForm").style.display = "none";
+                document.getElementById("productEntry").style.display = "block";
+                document.getElementById("productExit").style.display = "block";
+                document.getElementById("productList").style.display = "block";
+
+                // Atualiza quantidade e hora de entrada
+                document.getElementById("entryQuantityTime").innerText = "Quantidade: 10 | Hora: 09:00";
+                // Atualiza quantidade e hora de saída
+                document.getElementById("exitQuantityTime").innerText = "Quantidade: 5 | Hora: 15:30";
+
+                // Carrega a lista de produtos
+                loadProductList();
+            } else {
+                alert("Usuário ou senha incorretos.");
+            }
+        });
+
+        function addProduct() {
+            const quantity = document.getElementById("entryQuantity").value;
+            // Adicionar a lógica para adicionar produtos ao estoque
+            alert(quantity + " produtos adicionados ao estoque.");
+        }
+
+        function removeProduct() {
+            const quantity = document.getElementById("exitQuantity").value;
+            // Adicionar a lógica para remover produtos do estoque
+            alert(quantity + " produtos removidos do estoque.");
+        }
+
+        function loadProductList() {
+            // Adicionar a lógica para carregar a lista de produtos
+            document.getElementById("productList").innerHTML = "<p>Lista de produtos carregada.</p>";
+        }
+    </script>
+</body>
+</html>
